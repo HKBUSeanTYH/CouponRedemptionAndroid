@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="couponImage">
+        <item>https://cdn.stocksnap.io/img-thumbs/960w/philadelphia-travel_LPDQBLM2A0.jpg</item>
+        <item>https://cdn.stocksnap.io/img-thumbs/960w/people-student_EWT7K0DQLN.jpg</item>
+        <item>https://cdn.stocksnap.io/img-thumbs/960w/restaurant-bar_KI4IDLRWIJ.jpg</item>
+        <item>https://cdn.stocksnap.io/img-thumbs/960w/book-pen_S05DRRCFVB.jpg</item>
+    </string-array>
+
+    <string-array name="couponRestaurant">
+        <item>restaurant A</item>
+        <item>restaurant B</item>
+        <item>restaurant C</item>
+        <item>restaurant D</item>
+    </string-array>
+
+    <string-array name="couponDescription">
+        <item>Description of A</item>
+        <item>Description of B</item>
+        <item>Description of C</item>
+        <item>Description of D</item>
+    </string-array>
+
+    <string-array name="couponCoins">
+        <item>200</item>
+        <item>400</item>
+        <item>600</item>
+        <item>100</item>
+    </string-array>
+</resources>

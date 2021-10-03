@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/couponsListFragment">
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_home"-->
+<!--        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.home.HomeFragment"-->
+<!--        android:label="@string/title_home"-->
+<!--        tools:layout="@layout/fragment_home" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_dashboard"-->
+<!--        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.dashboard.DashboardFragment"-->
+<!--        android:label="@string/title_dashboard"-->
+<!--        tools:layout="@layout/fragment_dashboard" />-->
+
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_notifications"-->
+<!--        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.notifications.NotificationsFragment"-->
+<!--        android:label="@string/title_notifications"-->
+<!--        tools:layout="@layout/fragment_notifications" />-->
+    <fragment
+        android:id="@+id/mallsFragment"
+        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.malls.MallsFragment"
+        android:label="Malls"
+        tools:layout="@layout/fragment_malls_list" />
+    <fragment
+        android:id="@+id/couponsListFragment"
+        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.coupons.CouponsListFragment"
+        android:label="Coupons"
+        tools:layout="@layout/fragment_coupons_list" />
+</navigation>
