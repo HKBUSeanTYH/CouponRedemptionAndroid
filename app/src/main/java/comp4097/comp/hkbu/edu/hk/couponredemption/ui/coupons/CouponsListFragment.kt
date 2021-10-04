@@ -1,6 +1,7 @@
 package comp4097.comp.hkbu.edu.hk.couponredemption.ui.coupons
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,9 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import comp4097.comp.hkbu.edu.hk.couponredemption.Network
 import comp4097.comp.hkbu.edu.hk.couponredemption.R
 import comp4097.comp.hkbu.edu.hk.couponredemption.data.Coupons
 import comp4097.comp.hkbu.edu.hk.couponredemption.ui.coupons.placeholder.PlaceholderContent
+import comp4097.comp.hkbu.edu.hk.couponredemption.ui.malls.MallsFragment.Companion.ARG_COLUMN_COUNT
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * A fragment representing a list of Items.
@@ -27,34 +35,74 @@ class CouponsListFragment : Fragment() {
         }
     }
 
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        val view = inflater.inflate(R.layout.fragment_coupons_list, container, false)
+//
+//        // Set the adapter
+//        if (view is RecyclerView) {
+//            with(view) {
+//                layoutManager = when {
+//                    columnCount <= 1 -> LinearLayoutManager(context)
+//                    else -> GridLayoutManager(context, columnCount)
+//                }
+////                adapter = CouponsRecyclerViewAdapter(PlaceholderContent.ITEMS)
+//                val couponImage = resources.getStringArray(R.array.couponImage)
+//                val couponRestaurant = resources.getStringArray(R.array.couponRestaurant)
+//                val couponDescription = resources.getStringArray(R.array.couponDescription)
+//                val couponCoins = resources.getStringArray(R.array.couponCoins)
+//
+//                val coupons =   mutableListOf<Coupons>()
+//                for (i in 0..(couponRestaurant.size - 1)){
+//                    coupons.add(Coupons(couponImage[i], couponRestaurant[i], couponDescription[i], couponCoins[i]))
+//                }
+//
+//                adapter = CouponsRecyclerViewAdapter(coupons)
+//            }
+//        }
+//        return view
+//    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_coupons_list, container, false)
-
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
+        val recyclerView = inflater.inflate(
+            R.layout.fragment_coupons_list, container, false
+        ) as RecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        reloadData(recyclerView)
+        return recyclerView
+    }
+    private fun reloadData(recyclerView: RecyclerView) {
+        val NEWS_URL = "https://api.npoint.io/256da2ee7badc12b0ec2"
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val json = Network.getTextFromNetwork(NEWS_URL)
+                val coupons =
+                    Gson().fromJson<List<Coupons>>(
+                        json,
+                        object : TypeToken<List<Coupons>>() {}.type
+                    )
+                CoroutineScope(Dispatchers.Main).launch {
+                    recyclerView.adapter = CouponsRecyclerViewAdapter(coupons)
                 }
-//                adapter = CouponsRecyclerViewAdapter(PlaceholderContent.ITEMS)
-                val couponImage = resources.getStringArray(R.array.couponImage)
-                val couponRestaurant = resources.getStringArray(R.array.couponRestaurant)
-                val couponDescription = resources.getStringArray(R.array.couponDescription)
-                val couponCoins = resources.getStringArray(R.array.couponCoins)
+            } catch (e: Exception) {
+                Log.d("NewsListFragment", "Error in loading data")
+                val coupons = listOf(
+                    Coupons(
+                        "", "Cannot fetch coupons",
+                        "Please check your network connection,", ""
+                    )
+                )
 
-                val coupons =   mutableListOf<Coupons>()
-                for (i in 0..(couponRestaurant.size - 1)){
-                    coupons.add(Coupons(couponImage[i], couponRestaurant[i], couponDescription[i], couponCoins[i]))
+                CoroutineScope(Dispatchers.Main).launch {
+                    recyclerView.adapter = CouponsRecyclerViewAdapter(coupons)
                 }
-
-                adapter = CouponsRecyclerViewAdapter(coupons)
             }
         }
-        return view
     }
 
     companion object {
