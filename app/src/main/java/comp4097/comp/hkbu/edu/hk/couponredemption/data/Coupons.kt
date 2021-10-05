@@ -1,9 +1,12 @@
 package comp4097.comp.hkbu.edu.hk.couponredemption.data
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity
 class Coupons (
     val createdAt: Long,
     val updatedAt: Long,
-    val id: Int,
+    @PrimaryKey val id: Int,
     val title: String,
     val restaurant: String,
     val region: String,
