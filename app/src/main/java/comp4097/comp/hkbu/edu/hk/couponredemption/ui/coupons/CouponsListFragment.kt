@@ -77,24 +77,23 @@ class CouponsListFragment : Fragment() {
         return recyclerView
     }
     private fun reloadData(recyclerView: RecyclerView) {
-        val NEWS_URL = "https://api.npoint.io/256da2ee7badc12b0ec2"
+        val NEWS_URL = "https://5b07-158-182-198-90.ngrok.io/shop/json"
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val json = Network.getTextFromNetwork(NEWS_URL)
+                Log.d("JSON", json)
                 val coupons =
-                    Gson().fromJson<List<Coupons>>(
-                        json,
-                        object : TypeToken<List<Coupons>>() {}.type
-                    )
+                    Gson().fromJson<List<Coupons>>(json,object : TypeToken<List<Coupons>>() {}.type)
                 CoroutineScope(Dispatchers.Main).launch {
                     recyclerView.adapter = CouponsRecyclerViewAdapter(coupons)
                 }
             } catch (e: Exception) {
-                Log.d("NewsListFragment", "Error in loading data")
+                Log.d("CouponsListFragment", "Error in loading data")
                 val coupons = listOf(
                     Coupons(
-                        "", "Cannot fetch coupons",
-                        "Please check your network connection,", ""
+                        0, "Cannot fetch coupons",
+                        "Please check your network connection,", "","","",0,
+                        0,"",""
                     )
                 )
 

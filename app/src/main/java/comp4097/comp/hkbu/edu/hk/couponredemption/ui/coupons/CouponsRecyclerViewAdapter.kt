@@ -37,10 +37,16 @@ class CouponsRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
 
-        Picasso.get().load(item.image).into(holder.couponsImageView)
+//        Picasso.get().load(item.image).into(holder.couponsImageView)
         holder.restaurantTextView.text = item.restaurant
-        holder.descriptionTextView.text = item.description
-        holder.coinsTextView.text = item.coins
+        holder.titleTextView.text = item.title
+        holder.coinsTextView.text = item.coins.toString()
+
+        if (item.image != "")
+            Picasso.get().load(item.image).into(holder.couponsImageView)
+        else
+            holder.couponsImageView.setImageDrawable(holder.itemView
+                .context.getDrawable(R.drawable.ic_notifications_black_24dp))
 
 //        holder.idView.text = item.id
 //        holder.contentView.text = item.content
@@ -52,7 +58,7 @@ class CouponsRecyclerViewAdapter(
         RecyclerView.ViewHolder(binding.root) {
         val couponsImageView: ImageView = binding.couponImageView
         val restaurantTextView: TextView = binding.restaurantTextView
-        val descriptionTextView: TextView = binding.descriptionTextView
+        val titleTextView: TextView = binding.titleTextView
         val coinsTextView: TextView = binding.coinsTextView
 
 //        val idView: TextView = binding.itemNumber
