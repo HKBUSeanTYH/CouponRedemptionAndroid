@@ -1,6 +1,8 @@
 package comp4097.comp.hkbu.edu.hk.couponredemption.data
 
 class Coupons (
+    val createdAt: Long,
+    val updatedAt: Long,
     val id: Int,
     val title: String,
     val restaurant: String,

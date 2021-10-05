@@ -26,7 +26,11 @@
         android:id="@+id/mallsFragment"
         android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.malls.MallsFragment"
         android:label="Malls"
-        tools:layout="@layout/fragment_malls_list" />
+        tools:layout="@layout/fragment_malls_list" >
+        <action
+            android:id="@+id/action_mallsFragment_self"
+            app:destination="@id/mallsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/couponsListFragment"
         android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.coupons.CouponsListFragment"

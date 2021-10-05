@@ -84,14 +84,16 @@ class CouponsListFragment : Fragment() {
                 Log.d("JSON", json)
                 val coupons =
                     Gson().fromJson<List<Coupons>>(json,object : TypeToken<List<Coupons>>() {}.type)
+                Log.d("Read", coupons.toString())
                 CoroutineScope(Dispatchers.Main).launch {
                     recyclerView.adapter = CouponsRecyclerViewAdapter(coupons)
                 }
             } catch (e: Exception) {
                 Log.d("CouponsListFragment", "Error in loading data")
+                e.message?.let { Log.d("Error", it) }
                 val coupons = listOf(
                     Coupons(
-                        0, "Cannot fetch coupons",
+                        0,0,0, "Cannot fetch coupons",
                         "Please check your network connection,", "","","",0,
                         0,"",""
                     )

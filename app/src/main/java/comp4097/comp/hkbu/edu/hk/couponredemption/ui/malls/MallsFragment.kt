@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import comp4097.comp.hkbu.edu.hk.couponredemption.R
+import comp4097.comp.hkbu.edu.hk.couponredemption.data.SampleData
 import comp4097.comp.hkbu.edu.hk.couponredemption.ui.malls.placeholder.PlaceholderContent
 
 /**
@@ -39,7 +41,18 @@ class MallsFragment : Fragment() {
                     columnCount <= 1 -> LinearLayoutManager(context)
                     else -> GridLayoutManager(context, columnCount)
                 }
-                adapter = MallRecyclerViewAdapter(PlaceholderContent.ITEMS)
+
+                val mall = arguments?.getString("mall")
+                if (mall  == null)
+                    adapter = MallRecyclerViewAdapter(SampleData.MALL)
+                else {
+                    adapter = FilteredCouponsRecyclerViewAdapter(SampleData.FILTEREDCOUPONS.filter {
+                        it.mall == mall
+                    })
+//to enable the back-arrow in the ActionBar.
+                    (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//                adapter = MallRecyclerViewAdapter(SampleData.MALL)
+                }
             }
         }
         return view
