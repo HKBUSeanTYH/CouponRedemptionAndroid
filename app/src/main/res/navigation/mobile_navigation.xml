@@ -36,4 +36,13 @@
         android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.coupons.CouponsListFragment"
         android:label="Coupons"
         tools:layout="@layout/fragment_coupons_list" />
+    <fragment
+        android:id="@+id/coinsFragment"
+        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.coins.CoinsFragment"
+        android:label="Coins"
+        tools:layout="@layout/fragment_coins_list">
+        <action
+            android:id="@+id/action_coinsFragment_self"
+            app:destination="@id/coinsFragment" />
+    </fragment>
 </navigation>

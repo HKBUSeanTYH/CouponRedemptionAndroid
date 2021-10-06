@@ -27,7 +27,7 @@ abstract class AppDatabase : RoomDatabase() {
         suspend fun initDB() {
             instance?.clearAllTables() //add this line when you are still debugging
             //SampleData.EVENT.forEach { instance?.eventDao()?.insert(it) }
-            val NEWS_URL = "https://60ed-223-18-233-239.ngrok.io/restaurant/json"
+            val NEWS_URL = "https://b827-158-182-203-141.ngrok.io/shop/json"
             val json = Network.getTextFromNetwork(NEWS_URL)
             //convert the string json into List<news>
             val coupons =

@@ -13,13 +13,13 @@ interface CouponsDao {
     suspend fun findCouponsByMall(mall: String): List<Coupons>
 
     @Query("Select * from coupons where coins <= :coins")
-    suspend fun findCouponsLessThan(coins: Int): List<Coupons>
+    suspend fun findCouponsLessThanEquals(coins: Int): List<Coupons>
 
-    @Query("Select * from coupons where coins >= :mincoins and coins <= :maxcoins")
+    @Query("Select * from coupons where coins > :mincoins and coins < :maxcoins")
     suspend fun findCouponsBetween(mincoins: Int, maxcoins: Int): List<Coupons>
 
     @Query("Select * from coupons where coins >= :coins")
-    suspend fun findCouponsMoreThan(coins: Int): List<Coupons>
+    suspend fun findCouponsMoreThanEquals(coins: Int): List<Coupons>
 
     @Delete
     suspend fun delete(vararg coupons: Coupons)

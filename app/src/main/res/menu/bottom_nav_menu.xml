@@ -11,6 +11,11 @@
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/malls" />
 
+    <item
+        android:id="@+id/coinsFragment"
+        android:icon="@android:drawable/gallery_thumb"
+        android:title="@string/coins" />
+
 <!--    <item-->
 <!--        android:id="@+id/navigation_dashboard"-->
 <!--        android:icon="@drawable/ic_dashboard_black_24dp"-->

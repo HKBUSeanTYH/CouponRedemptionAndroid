@@ -19,4 +19,10 @@ object SampleData {
         FilteredCoupons(2,"Mongo Tree","Festival Walk"),
         FilteredCoupons(3,"Yoogane","New Town Plaza")
     )
+
+    val COINRANGE = listOf(
+        Coins("Coins <= 300"),
+        Coins("300 < Coins < 600"),
+        Coins("Coins >= 600")
+    )
 }
