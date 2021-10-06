@@ -36,7 +36,7 @@ class MallRecyclerViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.contentView.text = item.mall
+        holder.idView.text = item.mall
 //        holder.contentView.text = item.content
     }
 
@@ -44,20 +44,20 @@ class MallRecyclerViewAdapter(
 
     inner class ViewHolder(binding: FragmentMallsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        val contentView: TextView = binding.content
+        val idView: TextView = binding.content
 //        val contentView: TextView = binding.content
 
         init{
             binding.root.setOnClickListener{
                 it.findNavController().navigate(
                     R.id.action_mallsFragment_self,
-                    bundleOf(Pair("mall", contentView.text.toString()))
+                    bundleOf(Pair("mall", idView.text.toString()))
                 )
             }
         }
 
         override fun toString(): String {
-            return super.toString() + " '" + contentView.text + "'"
+            return super.toString() + " '" + idView.text + "'"
         }
     }
 

@@ -7,11 +7,12 @@ import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import comp4097.comp.hkbu.edu.hk.couponredemption.R
+import comp4097.comp.hkbu.edu.hk.couponredemption.data.Coupons
 import comp4097.comp.hkbu.edu.hk.couponredemption.data.FilteredCoupons
 import comp4097.comp.hkbu.edu.hk.couponredemption.databinding.FragmentMallsItemBinding
 
 class FilteredCouponsRecyclerViewAdapter (
-    private val values: List<FilteredCoupons>
+    private val values: List<Coupons>
 ) : RecyclerView.Adapter<FilteredCouponsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,6 +29,7 @@ class FilteredCouponsRecyclerViewAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
+        holder.idView.text = item.mall
         holder.contentView.text = item.restaurant
 //        holder.contentView.text = item.content
     }
@@ -36,6 +38,7 @@ class FilteredCouponsRecyclerViewAdapter (
 
     inner class ViewHolder(binding: FragmentMallsItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        val idView: TextView = binding.itemNumber
         val contentView: TextView = binding.content
 //        val contentView: TextView = binding.content
 

@@ -10,8 +10,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import comp4097.comp.hkbu.edu.hk.couponredemption.R
+import comp4097.comp.hkbu.edu.hk.couponredemption.data.AppDatabase
 import comp4097.comp.hkbu.edu.hk.couponredemption.data.SampleData
 import comp4097.comp.hkbu.edu.hk.couponredemption.ui.malls.placeholder.PlaceholderContent
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * A fragment representing a list of Items.
@@ -46,12 +50,19 @@ class MallsFragment : Fragment() {
                 if (mall  == null)
                     adapter = MallRecyclerViewAdapter(SampleData.MALL)
                 else {
-                    adapter = FilteredCouponsRecyclerViewAdapter(SampleData.FILTEREDCOUPONS.filter {
-                        it.mall == mall
-                    })
-//to enable the back-arrow in the ActionBar.
-                    (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val dao = AppDatabase.getInstance(context).couponsDao()
+                        val coupons = dao.findCouponsByMall(mall)
+                        CoroutineScope(Dispatchers.Main).launch {
+                            adapter = FilteredCouponsRecyclerViewAdapter(coupons)
+                        }
+                    }
+//                    adapter = FilteredCouponsRecyclerViewAdapter(SampleData.FILTEREDCOUPONS.filter {
+//                        it.mall == mall
+//                    })
 //                adapter = MallRecyclerViewAdapter(SampleData.MALL)
+                    //to enable the back-arrow in the ActionBar.
+                    (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
                 }
             }
         }
