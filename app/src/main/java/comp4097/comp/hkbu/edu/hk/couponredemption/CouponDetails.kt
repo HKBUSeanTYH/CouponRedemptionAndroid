@@ -5,6 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import comp4097.comp.hkbu.edu.hk.couponredemption.data.AppDatabase
+import comp4097.comp.hkbu.edu.hk.couponredemption.data.Coupons
+import comp4097.comp.hkbu.edu.hk.couponredemption.ui.coupons.CouponsRecyclerViewAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,8 +43,16 @@ class CouponDetails : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_coupon_details, container, false)
+        val view = inflater.inflate(R.layout.fragment_coupon_details, container, false)
+
+        // Set the adapter
+        if (view is RecyclerView) {
+            with(view) {
+
+            }
+        }
+        return view
+        //return inflater.inflate(R.layout.fragment_coupon_details, container, false)
     }
 
     companion object {

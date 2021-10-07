@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import com.squareup.picasso.Picasso
 import comp4097.comp.hkbu.edu.hk.couponredemption.R
 import comp4097.comp.hkbu.edu.hk.couponredemption.data.Coupons
@@ -60,6 +62,15 @@ class CouponsRecyclerViewAdapter(
         val restaurantTextView: TextView = binding.restaurantTextView
         val titleTextView: TextView = binding.titleTextView
         val coinsTextView: TextView = binding.coinsTextView
+
+        init {
+            binding.root.setOnClickListener{
+                it.findNavController().navigate(
+                    R.id.action_couponsListFragment_to_couponDetails,
+                    bundleOf(Pair("restaurant", restaurantTextView.text.toString()))
+                )
+            }
+        }
 
 //        val idView: TextView = binding.itemNumber
 //        val contentView: TextView = binding.content

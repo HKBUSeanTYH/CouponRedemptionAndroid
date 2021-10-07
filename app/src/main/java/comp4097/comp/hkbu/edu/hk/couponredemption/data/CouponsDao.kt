@@ -9,6 +9,9 @@ interface CouponsDao {
     @Query("Select * from coupons")
     suspend fun getAllCoupons(): List<Coupons>
 
+    @Query("Select * from coupons where restaurant = :restaurant")
+    suspend fun findCouponsByName(restaurant: String): Coupons
+
     @Query("Select * from coupons where mall = :mall")
     suspend fun findCouponsByMall(mall: String): List<Coupons>
 
