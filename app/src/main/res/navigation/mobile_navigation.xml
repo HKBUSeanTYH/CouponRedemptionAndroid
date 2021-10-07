@@ -35,7 +35,11 @@
         android:id="@+id/couponsListFragment"
         android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.coupons.CouponsListFragment"
         android:label="Coupons"
-        tools:layout="@layout/fragment_coupons_list" />
+        tools:layout="@layout/fragment_coupons_list" >
+        <action
+            android:id="@+id/action_couponsListFragment_to_couponDetails"
+            app:destination="@id/couponDetails" />
+    </fragment>
     <fragment
         android:id="@+id/coinsFragment"
         android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.coins.CoinsFragment"
@@ -45,4 +49,9 @@
             android:id="@+id/action_coinsFragment_self"
             app:destination="@id/coinsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/couponDetails"
+        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.CouponDetails"
+        android:label="Coupon"
+        tools:layout="@layout/fragment_coupon_details" />
 </navigation>
