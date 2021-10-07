@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,14 +44,21 @@ class CouponDetails : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_coupon_details, container, false)
+        val view = inflater.inflate(
+            R.layout.fragment_coupon_details, container, false
+        )
 
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
+        val restaurant = arguments?.getString("restaurant")
+        val str = restaurant.toString()
 
-            }
+        CoroutineScope(Dispatchers.IO).launch {
+            val dao = AppDatabase.getInstance(view.context).couponsDao()
+            val coupon = dao.findCouponsByName(str)
+
+            val titletextview2 = view.findViewById<TextView>(R.id.titleTextView2)
+            titletextview2.setText(coupon.title)
         }
+
         return view
         //return inflater.inflate(R.layout.fragment_coupon_details, container, false)
     }
