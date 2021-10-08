@@ -5,17 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import comp4097.comp.hkbu.edu.hk.couponredemption.data.AppDatabase
-import comp4097.comp.hkbu.edu.hk.couponredemption.data.Coupons
-import comp4097.comp.hkbu.edu.hk.couponredemption.ui.coupons.CouponsRecyclerViewAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,8 +51,22 @@ class CouponDetails : Fragment() {
             val dao = AppDatabase.getInstance(view.context).couponsDao()
             val coupon = dao.findCouponsByName(str)
 
+//            val couponImageView2 = view.findViewById<ImageView>(R.id.couponImageView2)
+//            if (coupon.image != "")
+//                Picasso.get().load(coupon.image).into(couponImageView2)
+
             val titletextview2 = view.findViewById<TextView>(R.id.titleTextView2)
             titletextview2.setText(coupon.title)
+            val detailsTextView3 = view.findViewById<TextView>(R.id.detailsTextView3)
+            detailsTextView3.setText(coupon.details)
+
+//            val mallTextView = view.findViewById<TextView>(R.id.mallTextView2)
+//            mallTextView.setText(coupon.mall)
+//            val quotaTextView = view.findViewById<TextView>(R.id.coinsTextView2)
+//            quotaTextView.setText(coupon.coins)
+//
+//            val validTextView = view.findViewById<TextView>(R.id.validTextView)
+//            validTextView.setText(coupon.valid)
         }
 
         return view

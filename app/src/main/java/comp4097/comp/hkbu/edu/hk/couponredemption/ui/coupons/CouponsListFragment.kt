@@ -54,25 +54,12 @@ class CouponsListFragment : Fragment() {
                 }
 
                 CoroutineScope(Dispatchers.IO).launch {
-                    try{
-                        val dao = AppDatabase.getInstance(view.context).couponsDao()
-                        val coupons = dao.getAllCoupons()
+                    val dao = AppDatabase.getInstance(view.context).couponsDao()
+                    val coupons = dao.getAllCoupons()
 
-                        CoroutineScope(Dispatchers.Main).launch {
-                            adapter = CouponsRecyclerViewAdapter(coupons)
-                        }
-                    }catch (e: Exception){
-                        val placeholderCoupon = listOf(
-                            Coupons(0,0,0, "No Coupons found",
-                                "No Coupons found","","", "",0,
-                                0,"","Please check your connection")
-                        )
-
-                        CoroutineScope(Dispatchers.Main).launch {
-                            adapter = CouponsRecyclerViewAdapter(placeholderCoupon)
-                        }
+                    CoroutineScope(Dispatchers.Main).launch {
+                        adapter = CouponsRecyclerViewAdapter(coupons)
                     }
-
                 }
 //                adapter = CouponsRecyclerViewAdapter(PlaceholderContent.ITEMS)
 //                val couponImage = resources.getStringArray(R.array.couponImage)

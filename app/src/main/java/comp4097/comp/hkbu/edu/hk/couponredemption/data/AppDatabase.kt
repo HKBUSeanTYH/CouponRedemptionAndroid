@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import comp4097.comp.hkbu.edu.hk.couponredemption.Network
+import java.lang.Exception
 
 @Database(entities = arrayOf(Coupons::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {
@@ -30,10 +31,20 @@ abstract class AppDatabase : RoomDatabase() {
             val NEWS_URL = "https://5dc8-158-182-201-22.ngrok.io/shop/json"
             val json = Network.getTextFromNetwork(NEWS_URL)
             //convert the string json into List<news>
-            val coupons =
-                Gson().fromJson<List<Coupons>>(json, object : TypeToken<List<Coupons>>() {}.type)
 
-            coupons.forEach { instance?.couponsDao()?.insert(it) }
+            try{
+                val coupons =
+                    Gson().fromJson<List<Coupons>>(json, object : TypeToken<List<Coupons>>() {}.type)
+                coupons.forEach { instance?.couponsDao()?.insert(it) }
+            }catch (e: Exception){
+                val placeholderCoupon = listOf(
+                    Coupons(0,0,0, "No Coupons found",
+                        "No Coupons found","","", "",0,
+                        0,"","Please check your connection")
+                )
+                placeholderCoupon.forEach { instance?.couponsDao()?.insert(it) }
+            }
+
         }
     }
 }
