@@ -51,22 +51,22 @@ class CouponDetails : Fragment() {
             val dao = AppDatabase.getInstance(view.context).couponsDao()
             val coupon = dao.findCouponsByName(str)
 
-//            val couponImageView2 = view.findViewById<ImageView>(R.id.couponImageView2)
-//            if (coupon.image != "")
-//                Picasso.get().load(coupon.image).into(couponImageView2)
-
+            val couponImageView2 = view.findViewById<ImageView>(R.id.couponImageView2)
             val titletextview2 = view.findViewById<TextView>(R.id.titleTextView2)
-            titletextview2.setText(coupon.title)
             val detailsTextView3 = view.findViewById<TextView>(R.id.detailsTextView3)
-            detailsTextView3.setText(coupon.details)
+            val mallTextView = view.findViewById<TextView>(R.id.mallTextView2)
+            val quotaTextView = view.findViewById<TextView>(R.id.coinsTextView2)
+            val validTextView = view.findViewById<TextView>(R.id.validTextView)
 
-//            val mallTextView = view.findViewById<TextView>(R.id.mallTextView2)
-//            mallTextView.setText(coupon.mall)
-//            val quotaTextView = view.findViewById<TextView>(R.id.coinsTextView2)
-//            quotaTextView.setText(coupon.coins)
-//
-//            val validTextView = view.findViewById<TextView>(R.id.validTextView)
-//            validTextView.setText(coupon.valid)
+            CoroutineScope(Dispatchers.Main).launch {
+                if (coupon.image != "")
+                    Picasso.get().load(coupon.image).into(couponImageView2)
+            }
+            titletextview2.setText(coupon.title)
+            detailsTextView3.setText(coupon.details)
+            mallTextView.setText(coupon.mall)
+            quotaTextView.setText(coupon.coins.toString())
+            validTextView.setText(coupon.valid)
         }
 
         return view

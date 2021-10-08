@@ -29,18 +29,20 @@ abstract class AppDatabase : RoomDatabase() {
             instance?.clearAllTables() //add this line when you are still debugging
             //SampleData.EVENT.forEach { instance?.eventDao()?.insert(it) }
             val NEWS_URL = "https://5dc8-158-182-201-22.ngrok.io/shop/json"
-            val json = Network.getTextFromNetwork(NEWS_URL)
-            //convert the string json into List<news>
 
             try{
+                val json = Network.getTextFromNetwork(NEWS_URL)
+                //convert the string json into List<news>
+                
                 val coupons =
                     Gson().fromJson<List<Coupons>>(json, object : TypeToken<List<Coupons>>() {}.type)
                 coupons.forEach { instance?.couponsDao()?.insert(it) }
             }catch (e: Exception){
                 val placeholderCoupon = listOf(
-                    Coupons(0,0,0, "No Coupons found",
-                        "No Coupons found","","", "",0,
-                        0,"","Please check your connection")
+                    Coupons(0,0,0, "Placeholder Coupon",
+                        "No Coupons found","Nowhere","no mall",
+                        "https://bulma.io/images/placeholders/128x128.png",0,
+                        0,"not valid","Please check your connection")
                 )
                 placeholderCoupon.forEach { instance?.couponsDao()?.insert(it) }
             }
