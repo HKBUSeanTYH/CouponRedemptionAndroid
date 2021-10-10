@@ -12,6 +12,7 @@ import java.lang.Exception
 @Database(entities = arrayOf(Coupons::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun couponsDao() : CouponsDao
+
     companion object {
         private var instance: AppDatabase? = null
         suspend fun getInstance(context: Context) : AppDatabase {
@@ -20,7 +21,7 @@ abstract class AppDatabase : RoomDatabase() {
 //build an instance
             instance = Room.databaseBuilder(context,
                 AppDatabase::class.java,
-                "infoDay").build()
+                "couponRedemption").build()
             initDB()
             return instance!!
         }
@@ -46,7 +47,6 @@ abstract class AppDatabase : RoomDatabase() {
                 )
                 placeholderCoupon.forEach { instance?.couponsDao()?.insert(it) }
             }
-
         }
     }
 }
