@@ -9,9 +9,13 @@ import com.google.gson.reflect.TypeToken
 import comp4097.comp.hkbu.edu.hk.couponredemption.Network
 import java.lang.Exception
 
-@Database(entities = arrayOf(Coupons::class), version = 1)
+@Database(
+    entities = arrayOf(Coupons::class, Mall::class),
+    version = 1
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun couponsDao() : CouponsDao
+    abstract fun mallDao() : MallDao
 
     companion object {
         private var instance: AppDatabase? = null
@@ -47,6 +51,9 @@ abstract class AppDatabase : RoomDatabase() {
                 )
                 placeholderCoupon.forEach { instance?.couponsDao()?.insert(it) }
             }
+
+            val malls = SampleData.MALL
+            malls.forEach { instance?.mallDao()?.insert(it) }
         }
     }
 }

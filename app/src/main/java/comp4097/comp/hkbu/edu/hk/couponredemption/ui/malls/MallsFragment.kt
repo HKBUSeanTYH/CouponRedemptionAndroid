@@ -15,6 +15,7 @@ import comp4097.comp.hkbu.edu.hk.couponredemption.data.SampleData
 import comp4097.comp.hkbu.edu.hk.couponredemption.ui.malls.placeholder.PlaceholderContent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 
 /**
@@ -47,9 +48,16 @@ class MallsFragment : Fragment() {
                 }
 
                 val mall = arguments?.getString("mall")
-                if (mall  == null)
-                    adapter = MallRecyclerViewAdapter(SampleData.MALL)
-                else {
+                if (mall  == null){
+                    CoroutineScope(Dispatchers.IO).launch {
+                        val dao = AppDatabase.getInstance(context).mallDao()
+                        val malls = dao.getAllMalls()
+                        CoroutineScope(Dispatchers.Main).launch {
+                            adapter = MallRecyclerViewAdapter(malls)
+                        }
+                    }
+                    //adapter = MallRecyclerViewAdapter(SampleData.MALL)
+                }else {
                     CoroutineScope(Dispatchers.IO).launch {
                         val dao = AppDatabase.getInstance(context).couponsDao()
                         val coupons = dao.findCouponsByMall(mall)
