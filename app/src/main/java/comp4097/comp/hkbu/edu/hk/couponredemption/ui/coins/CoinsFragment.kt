@@ -56,7 +56,7 @@ class CoinsFragment : Fragment() {
                         val dao = AppDatabase.getInstance(context).couponsDao()
                         val somecoupons = dao.findCouponsLessThanEquals(300)
                         CoroutineScope(Dispatchers.Main).launch {
-                            adapter = FilteredCouponsRecyclerViewAdapter(somecoupons)
+                            adapter = FilteredCoupons2RecyclerViewAdapter(somecoupons)
                         }
                     }
                     (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -65,7 +65,7 @@ class CoinsFragment : Fragment() {
                         val dao = AppDatabase.getInstance(context).couponsDao()
                         val somecoupons = dao.findCouponsBetween(300, 600)
                         CoroutineScope(Dispatchers.Main).launch {
-                            adapter = FilteredCouponsRecyclerViewAdapter(somecoupons)
+                            adapter = FilteredCoupons2RecyclerViewAdapter(somecoupons)
                         }
                     }
                     (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -74,7 +74,7 @@ class CoinsFragment : Fragment() {
                         val dao = AppDatabase.getInstance(context).couponsDao()
                         val somecoupons = dao.findCouponsMoreThanEquals(600)
                         CoroutineScope(Dispatchers.Main).launch {
-                            adapter = FilteredCouponsRecyclerViewAdapter(somecoupons)
+                            adapter = FilteredCoupons2RecyclerViewAdapter(somecoupons)
                         }
                     }
                     (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)

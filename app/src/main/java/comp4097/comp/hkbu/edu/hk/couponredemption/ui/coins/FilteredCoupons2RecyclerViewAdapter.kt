@@ -1,4 +1,4 @@
-package comp4097.comp.hkbu.edu.hk.couponredemption.ui.malls
+package comp4097.comp.hkbu.edu.hk.couponredemption.ui.coins
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,12 +8,11 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import comp4097.comp.hkbu.edu.hk.couponredemption.R
 import comp4097.comp.hkbu.edu.hk.couponredemption.data.Coupons
-import comp4097.comp.hkbu.edu.hk.couponredemption.data.FilteredCoupons
 import comp4097.comp.hkbu.edu.hk.couponredemption.databinding.FragmentMallsItemBinding
 
-class FilteredCouponsRecyclerViewAdapter (
+class FilteredCoupons2RecyclerViewAdapter (
     private val values: List<Coupons>
-) : RecyclerView.Adapter<FilteredCouponsRecyclerViewAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<FilteredCoupons2RecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -45,7 +44,7 @@ class FilteredCouponsRecyclerViewAdapter (
         init{
             binding.root.setOnClickListener{
                 it.findNavController().navigate(
-                    R.id.action_mallsFragment_to_couponDetails,
+                    R.id.action_coinsFragment_to_couponDetails,
                     bundleOf(Pair("restaurant", contentView.text.toString()))
                 )
             }

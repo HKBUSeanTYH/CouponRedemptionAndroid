@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_mallsFragment_self"
             app:destination="@id/mallsFragment" />
+        <action
+            android:id="@+id/action_mallsFragment_to_couponDetails"
+            app:destination="@id/couponDetails" />
     </fragment>
     <fragment
         android:id="@+id/couponsListFragment"
@@ -48,6 +51,9 @@
         <action
             android:id="@+id/action_coinsFragment_self"
             app:destination="@id/coinsFragment" />
+        <action
+            android:id="@+id/action_coinsFragment_to_couponDetails"
+            app:destination="@id/couponDetails" />
     </fragment>
     <fragment
         android:id="@+id/couponDetails"
