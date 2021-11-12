@@ -66,12 +66,12 @@
         android:label="Profile"
         tools:layout="@layout/fragment_profile_list" >
         <action
-            android:id="@+id/action_profileListFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_profileListFragment_to_customLoginFragment"
+            app:destination="@id/Login" />
     </fragment>
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.login.ui.login.LoginFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_login" />
+        android:id="@+id/Login"
+        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.customLoginFragment"
+        android:label="fragment_custom_login"
+        tools:layout="@layout/fragment_custom_login" />
 </navigation>
