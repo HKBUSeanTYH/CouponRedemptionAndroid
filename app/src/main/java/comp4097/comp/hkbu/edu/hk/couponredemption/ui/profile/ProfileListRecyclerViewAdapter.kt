@@ -58,8 +58,6 @@ class ProfileListRecyclerViewAdapter(
                 }
 
             }
-
-
         }
 
         override fun toString(): String {

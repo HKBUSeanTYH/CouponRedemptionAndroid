@@ -67,11 +67,11 @@
         tools:layout="@layout/fragment_profile_list" >
         <action
             android:id="@+id/action_profileListFragment_to_customLoginFragment"
-            app:destination="@id/Login" />
+            app:destination="@id/customLoginFragment" />
     </fragment>
     <fragment
-        android:id="@+id/Login"
+        android:id="@+id/customLoginFragment"
         android:name="comp4097.comp.hkbu.edu.hk.couponredemption.customLoginFragment"
-        android:label="fragment_custom_login"
+        android:label="Login"
         tools:layout="@layout/fragment_custom_login" />
 </navigation>
