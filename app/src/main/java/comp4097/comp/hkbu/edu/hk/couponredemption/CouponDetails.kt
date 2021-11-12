@@ -94,7 +94,21 @@ class CouponDetails : Fragment() {
                     Snackbar.make( view , "redeem canceled", Snackbar.LENGTH_SHORT).show()
                 }
                 .setPositiveButton("Yes") {dialog, which ->
-                     makeRequest(getString(R.string.url)+"user/coupons/add/"+coupon.id)
+                     showAlertMsg(view, makeRequest(getString(R.string.url)+"user/coupons/add/"+coupon.id))
+                }
+                .show()
+        }
+    }
+
+    fun showAlertMsg(view: View, str: String){
+        this.context?.let {
+            MaterialAlertDialogBuilder(it)
+                .setTitle(str)
+                .setNegativeButton("No") {dialog, which ->
+
+                }
+                .setPositiveButton("Ok") {dialog, which ->
+
                 }
                 .show()
         }

@@ -6,7 +6,17 @@
     <string name="coupons">Coupons</string>
     <string name="malls">Malls</string>
     <string name="coins">Coins</string>
-    <string name="url">https://6699-158-182-197-189.ngrok.io/</string>
+    <string name="url">https://7b4e-158-182-197-189.ngrok.io/</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Profile</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
 </resources>

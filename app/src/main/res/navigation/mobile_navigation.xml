@@ -60,4 +60,18 @@
         android:name="comp4097.comp.hkbu.edu.hk.couponredemption.CouponDetails"
         android:label="Coupon"
         tools:layout="@layout/fragment_coupon_details" />
+    <fragment
+        android:id="@+id/profileListFragment"
+        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.profile.ProfileListFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile_list" >
+        <action
+            android:id="@+id/action_profileListFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.login.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" />
 </navigation>

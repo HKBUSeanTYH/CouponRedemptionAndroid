@@ -25,4 +25,20 @@ object SampleData {
         Coins("300 < Coins < 600"),
         Coins("Coins >= 600")
     )
+
+    val LOGINITEMS = listOf(
+        ProfileItem("Login")
+
+    )
+
+    val LOGOUTITEMS = listOf(
+        ProfileItem("Logout"),
+        ProfileItem("Redeemed")
+    )
+
+    val profileitems = listOf(
+        ProfileItem("Logout"),
+        ProfileItem("Login"),
+        ProfileItem("Redeemed")
+    )
 }

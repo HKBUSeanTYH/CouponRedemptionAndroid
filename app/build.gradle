@@ -51,6 +51,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+    implementation 'androidx.annotation:annotation:1.2.0'
 
 
     testImplementation 'junit:junit:4.+'
