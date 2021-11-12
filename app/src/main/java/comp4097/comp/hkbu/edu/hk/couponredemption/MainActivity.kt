@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.snackbar.Snackbar
 import comp4097.comp.hkbu.edu.hk.couponredemption.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

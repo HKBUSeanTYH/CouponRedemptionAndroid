@@ -5,13 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import comp4097.comp.hkbu.edu.hk.couponredemption.data.AppDatabase
+import comp4097.comp.hkbu.edu.hk.couponredemption.data.Coupons
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.net.HttpURLConnection
+import java.net.URL
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,6 +64,8 @@ class CouponDetails : Fragment() {
             val quotaTextView = view.findViewById<TextView>(R.id.coinsTextView2)
             val validTextView = view.findViewById<TextView>(R.id.validTextView)
 
+            val redeemButton = view.findViewById<Button>(R.id.redeemButton)
+
             CoroutineScope(Dispatchers.Main).launch {
                 if (coupon.image != "")
                     Picasso.get().load(coupon.image).into(couponImageView2)
@@ -67,10 +75,44 @@ class CouponDetails : Fragment() {
             mallTextView.setText(coupon.mall)
             quotaTextView.setText(coupon.coins.toString())
             validTextView.setText(coupon.valid)
+
+            redeemButton.setOnClickListener {
+                showAlertDialog(view, coupon)
+            }
         }
 
         return view
         //return inflater.inflate(R.layout.fragment_coupon_details, container, false)
+    }
+
+    fun showAlertDialog(view: View, coupon: Coupons){
+        this.context?.let {
+            MaterialAlertDialogBuilder(it)
+                .setTitle("Redeem?")
+                .setMessage("Are you sure to redeem this coupon?")
+                .setNegativeButton("cancel") { dialog, which ->
+                    Snackbar.make( view , "redeem canceled", Snackbar.LENGTH_SHORT).show()
+                }
+                .setPositiveButton("Yes") {dialog, which ->
+                     makeRequest(getString(R.string.url)+"user/coupons/add/"+coupon.id)
+                }
+                .show()
+        }
+    }
+
+    fun makeRequest(url: String): String{
+        val builder = StringBuilder()
+        CoroutineScope(Dispatchers.IO).launch {
+
+            val connection = URL(url).openConnection() as HttpURLConnection
+            connection.setDoOutput(true);
+            var data: Int = connection.inputStream.read()
+            while (data != -1) {
+                builder.append(data.toChar())
+                data = connection.inputStream.read()
+            }
+        }
+        return builder.toString()
     }
 
     companion object {
