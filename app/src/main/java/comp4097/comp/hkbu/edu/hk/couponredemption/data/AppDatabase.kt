@@ -35,6 +35,7 @@ abstract class AppDatabase : RoomDatabase() {
             instance?.clearAllTables() //add this line when you are still debugging
             //SampleData.EVENT.forEach { instance?.eventDao()?.insert(it) }
             val NEWS_URL = "https://ac68-158-182-114-185.ngrok.io/shop/json"
+            //change url here
 
             try{
                 val json = Network.getTextFromNetwork(NEWS_URL)
