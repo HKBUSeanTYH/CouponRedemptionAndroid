@@ -10,8 +10,8 @@ object SampleData {
         Mall( "Festival Walk",22.3372971,114.1745273),
         Mall("MegaBox",22.319857,114.208168    ),
         Mall("APM",22.3121738,114.22513219999996),
-        Mall("Tsuen Wan Plaza ",22.370735,114.111309),
-        Mall("New Town Plaza ",22.3814592,114.1889307)
+        Mall("Tsuen Wan Plaza",22.370735,114.111309),
+        Mall("New Town Plaza",22.3814592,114.1889307)
     )
 
     val FILTEREDCOUPONS = listOf(

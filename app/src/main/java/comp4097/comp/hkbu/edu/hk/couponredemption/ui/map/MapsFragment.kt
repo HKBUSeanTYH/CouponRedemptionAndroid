@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import comp4097.comp.hkbu.edu.hk.couponredemption.R
 import comp4097.comp.hkbu.edu.hk.couponredemption.data.AppDatabase
+import comp4097.comp.hkbu.edu.hk.couponredemption.data.Mall
 import comp4097.comp.hkbu.edu.hk.couponredemption.data.MallDao
 import comp4097.comp.hkbu.edu.hk.couponredemption.ui.malls.MallRecyclerViewAdapter
 import kotlinx.coroutines.CoroutineScope
@@ -22,7 +23,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MapsFragment : Fragment() {
-
+    private var malls: List<Mall> = emptyList()
+    private var mallstr: String = ""
     private val callback = OnMapReadyCallback { googleMap ->
         /**
          * Manipulates the map once available.
@@ -33,13 +35,19 @@ class MapsFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val mallstr = arguments?.getString("mall")
-        CoroutineScope(Dispatchers.IO).launch {
-            val dao = context?.let { AppDatabase.getInstance(it).mallDao() }
-            val malls = dao?.getAllMalls()
-            val mall = mallstr?.let { dao?.getMallByName(it) }
 
-            val mallmarker = mall?.let { LatLng(mall.latitude, mall.longitude) }
+        CoroutineScope(Dispatchers.IO).launch {
+            val dao = AppDatabase.getInstance(requireContext()).mallDao()
+//            val malls = dao.getAllMalls()
+            val mall = dao.getMallByName(mallstr)
+
+            val mallmarker = LatLng(mall.latitude, mall.longitude)
+
+            //val dao = context?.let { AppDatabase.getInstance(it).mallDao() }
+            //val malls = dao?.getAllMalls()
+            //val mall = mallstr?.let { dao?.getMallByName(it) }
+
+            //val mallmarker = mall?.let { LatLng(mall.latitude, mall.longitude) }
 
             CoroutineScope(Dispatchers.Main).launch {
                 if (malls != null) {
@@ -63,7 +71,15 @@ class MapsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+        val view = inflater.inflate(R.layout.fragment_maps, container, false)
+
+        mallstr = requireArguments().getString("mall")!!
+        CoroutineScope(Dispatchers.IO).launch {
+            val dao = AppDatabase.getInstance(requireContext()).mallDao()
+            malls = dao.getAllMalls()
+        }
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -9,7 +9,7 @@ interface MallDao {
     @Query("Select * from mall group by mall")
     suspend fun getAllMalls(): List<Mall>
 
-    @Query("Select * from mall where mall = :mall group by mall")
+    @Query("Select * from mall where mall = :mall")
     suspend fun getMallByName(mall: String): Mall
 
     @Delete
