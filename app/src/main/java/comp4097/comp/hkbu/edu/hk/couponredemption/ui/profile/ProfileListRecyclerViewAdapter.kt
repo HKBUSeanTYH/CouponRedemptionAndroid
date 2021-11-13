@@ -62,7 +62,11 @@ class ProfileListRecyclerViewAdapter(
                         //, bundleOf(Pair("login", contentView.text.toString()))
                     )
                 }else if (contentView.text.toString().equals("Redeemed")){
-
+                    it.findNavController().navigate(
+                        //replace with navigate to login fragment
+                        R.id.action_profileListFragment_to_redeemedListFragment
+                        //, bundleOf(Pair("login", contentView.text.toString()))
+                    )
                 }else if (contentView.text.toString().equals("Logout")){
                     CoroutineScope(Dispatchers.IO).launch {
                         logoutReq(contentView.context.getString(R.string.url)+"user/logout")

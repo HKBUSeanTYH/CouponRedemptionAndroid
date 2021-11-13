@@ -68,10 +68,22 @@
         <action
             android:id="@+id/action_profileListFragment_to_customLoginFragment"
             app:destination="@id/customLoginFragment" />
+        <action
+            android:id="@+id/action_profileListFragment_to_redeemedListFragment"
+            app:destination="@id/redeemedListFragment" />
     </fragment>
     <fragment
         android:id="@+id/customLoginFragment"
         android:name="comp4097.comp.hkbu.edu.hk.couponredemption.customLoginFragment"
         android:label="Login"
         tools:layout="@layout/fragment_custom_login" />
+    <fragment
+        android:id="@+id/redeemedListFragment"
+        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.redeem.redeemedListFragment"
+        android:label="Redeemed Coupons"
+        tools:layout="@layout/fragment_redeemed_list">
+        <action
+            android:id="@+id/action_redeemedListFragment_to_couponDetails"
+            app:destination="@id/couponDetails" />
+    </fragment>
 </navigation>
