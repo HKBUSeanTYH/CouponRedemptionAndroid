@@ -59,7 +59,11 @@
         android:id="@+id/couponDetails"
         android:name="comp4097.comp.hkbu.edu.hk.couponredemption.CouponDetails"
         android:label="Coupon"
-        tools:layout="@layout/fragment_coupon_details" />
+        tools:layout="@layout/fragment_coupon_details" >
+        <action
+            android:id="@+id/action_couponDetails_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileListFragment"
         android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.profile.ProfileListFragment"
@@ -86,4 +90,9 @@
             android:id="@+id/action_redeemedListFragment_to_couponDetails"
             app:destination="@id/couponDetails" />
     </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="comp4097.comp.hkbu.edu.hk.couponredemption.ui.map.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
 </navigation>

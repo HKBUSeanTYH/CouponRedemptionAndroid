@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
@@ -65,6 +67,7 @@ class CouponDetails : Fragment() {
             val validTextView = view.findViewById<TextView>(R.id.validTextView)
 
             val redeemButton = view.findViewById<Button>(R.id.redeemButton)
+            val addressButton = view.findViewById<Button>(R.id.addressButton)
 
             CoroutineScope(Dispatchers.Main).launch {
                 if (coupon.image != "")
@@ -78,6 +81,13 @@ class CouponDetails : Fragment() {
 
             redeemButton.setOnClickListener {
                 showAlertDialog(view, coupon)
+            }
+
+            addressButton.setOnClickListener {
+                view.findNavController().navigate(
+                    R.id.action_couponDetails_to_mapsFragment,
+                    bundleOf(Pair("mall", coupon.mall))
+                )
             }
         }
 
