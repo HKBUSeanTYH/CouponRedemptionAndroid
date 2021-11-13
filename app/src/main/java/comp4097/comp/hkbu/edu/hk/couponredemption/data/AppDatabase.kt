@@ -7,6 +7,7 @@ import androidx.room.RoomDatabase
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import comp4097.comp.hkbu.edu.hk.couponredemption.Network
+import comp4097.comp.hkbu.edu.hk.couponredemption.R
 import java.lang.Exception
 
 @Database(
@@ -33,7 +34,7 @@ abstract class AppDatabase : RoomDatabase() {
         suspend fun initDB() {
             instance?.clearAllTables() //add this line when you are still debugging
             //SampleData.EVENT.forEach { instance?.eventDao()?.insert(it) }
-            val NEWS_URL = "https://7b4e-158-182-197-189.ngrok.io/shop/json"
+            val NEWS_URL = "https://ac68-158-182-114-185.ngrok.io/shop/json"
 
             try{
                 val json = Network.getTextFromNetwork(NEWS_URL)

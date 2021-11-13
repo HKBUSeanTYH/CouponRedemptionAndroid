@@ -14,6 +14,8 @@ import comp4097.comp.hkbu.edu.hk.couponredemption.R
 import comp4097.comp.hkbu.edu.hk.couponredemption.data.ProfileItem
 import comp4097.comp.hkbu.edu.hk.couponredemption.data.SampleData
 import comp4097.comp.hkbu.edu.hk.couponredemption.placeholder.PlaceholderContent
+import java.net.HttpURLConnection
+import java.net.URL
 
 /**
  * A fragment representing a list of Items.
@@ -22,9 +24,20 @@ class ProfileListFragment : Fragment() {
 
     private var columnCount = 1
     lateinit var model: LoginViewModel
+    private var arraydata: List<ProfileItem> = SampleData.LOGINITEMS
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        model = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
+
+        model.loginstatus.observe(this, Observer {
+            if (it){
+                arraydata = SampleData.LOGINITEMS
+            }else{
+                arraydata = SampleData.LOGOUTITEMS
+            }
+        })
 
         arguments?.let {
             columnCount = it.getInt(ARG_COLUMN_COUNT)
@@ -45,30 +58,15 @@ class ProfileListFragment : Fragment() {
                     else -> GridLayoutManager(context, columnCount)
                 }
 
-                val model = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-                model.loginstatus.observe(viewLifecycleOwner, Observer {
-                    if (it){
-                        adapter = ProfileListRecyclerViewAdapter(SampleData.LOGOUTITEMS)
-                    }else if (!it){
-                        adapter =  ProfileListRecyclerViewAdapter(SampleData.LOGINITEMS)
-                    }
-                })
-
-//                if (status == false){
-//                    adapter = ProfileListRecyclerViewAdapter(SampleData.LOGOUTITEMS)
-//                }else if (status == true){
-//                    adapter =  ProfileListRecyclerViewAdapter(SampleData.LOGINITEMS)
-//                }else{
-//                    adapter = ProfileListRecyclerViewAdapter(SampleData.profileitems)
-//                }
-
+                adapter = ProfileListRecyclerViewAdapter(arraydata, model)
             }
         }
         return view
     }
 
-    companion object {
 
+
+    companion object {
         // TODO: Customize parameter argument names
         const val ARG_COLUMN_COUNT = "column-count"
 

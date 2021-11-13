@@ -94,38 +94,47 @@ class CouponDetails : Fragment() {
                     Snackbar.make( view , "redeem canceled", Snackbar.LENGTH_SHORT).show()
                 }
                 .setPositiveButton("Yes") {dialog, which ->
-                     showAlertMsg(view, makeRequest(getString(R.string.url)+"user/coupons/add/"+coupon.id))
+                    CoroutineScope(Dispatchers.IO).launch {
+                        Snackbar.make(view, makeRequest(getString(R.string.url)+"user/coupons/add/"+coupon.id), Snackbar.LENGTH_LONG).show()
+                    }
                 }
                 .show()
         }
     }
 
-    fun showAlertMsg(view: View, str: String){
-        this.context?.let {
-            MaterialAlertDialogBuilder(it)
-                .setTitle(str)
-                .setNegativeButton("No") {dialog, which ->
-
-                }
-                .setPositiveButton("Ok") {dialog, which ->
-
-                }
-                .show()
-        }
-    }
+//    fun showAlertMsg(view: View, str: String){
+//        this.context?.let {
+//            MaterialAlertDialogBuilder(it)
+//                .setTitle(str)
+//                .setPositiveButton("Ok") {dialog, which ->
+//                    //Snackbar.make( view , str, Snackbar.LENGTH_SHORT).show()
+//                }
+//                .show()
+//        }
+//    }
 
     fun makeRequest(url: String): String{
-        val builder = StringBuilder()
-        CoroutineScope(Dispatchers.IO).launch {
+        var builder = StringBuilder()
 
-            val connection = URL(url).openConnection() as HttpURLConnection
-            connection.setDoOutput(true);
+        val connection = URL(url).openConnection() as HttpURLConnection
+        connection.setDoOutput(true)
+
+        try{
             var data: Int = connection.inputStream.read()
             while (data != -1) {
                 builder.append(data.toChar())
                 data = connection.inputStream.read()
             }
+        }catch (e: Exception){
+            builder = StringBuilder()
+            builder.append(connection.responseMessage)
+        }finally{
+            if (connection.responseCode == 200){
+                builder.append("coupon redeemed sucessfully")
+            }
+            connection.disconnect()
         }
+
         return builder.toString()
     }
 

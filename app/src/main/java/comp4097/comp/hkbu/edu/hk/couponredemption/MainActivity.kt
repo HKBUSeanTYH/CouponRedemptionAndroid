@@ -10,6 +10,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.snackbar.Snackbar
 import comp4097.comp.hkbu.edu.hk.couponredemption.databinding.ActivityMainBinding
+import java.net.CookieHandler
+import java.net.CookieManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        CookieHandler.setDefault(CookieManager())
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
