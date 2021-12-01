@@ -32,7 +32,7 @@ class ProfileListFragment : Fragment() {
         model = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
 
         model.loginstatus.observe(this, Observer {
-            if (it){
+            if (it == false){
                 arraydata = SampleData.LOGINITEMS
             }else{
                 arraydata = SampleData.LOGOUTITEMS
